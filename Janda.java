@@ -1,12 +1,14 @@
 import java.io.*;
 import java.util.*;
+import java.lang.*;
+import java.util.zip.DataFormatException;
 
 public class Janda {
 
     private List<String> colNames;
     private Map<String, List<String>> df;
 
-    public Janda(String filPath, boolean hasColumnNames, List<String> colNames) {
+    public Janda(String filePath, boolean hasColumnNames, List<String> colNames) {
         try {
             Scanner sc = new Scanner(new File(filePath));
             // if no next line then file is empty
@@ -14,7 +16,7 @@ public class Janda {
                 throw new DataFormatException();
                 // if csv already has column names
             if(hasColumnNames) {
-                makeDataFramFromCSV(sc);
+                makeDataFrameFromCSV(sc);
             }
             // csv has no column names
             else {
@@ -45,7 +47,7 @@ public class Janda {
 
     private List<String> getColNamesFromCSV(Scanner sc) {
         String[] extractedCols = sc.nextLine().split(",");
-        return new ArrayList<String>(cols);
+        return Arrays.asList(extractedCols);
     }
 
     public Janda(String filePath, boolean hasColumnNames) {
@@ -66,7 +68,7 @@ public class Janda {
     }
 
     private boolean isInteger(String s) {
-        // TODO : implement if string is double
+        // TODO : implement if string is int
         return false;
     }
 }
